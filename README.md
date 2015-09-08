@@ -3,8 +3,10 @@ to compile any of the projects:
 
 1. extract gcc_64.tar.bz2 in a folder
 
-2. ../gcc_64/bin/qmake -o Makefile project.pro
+2. go to the project directory and delete any existing .user files
 
-3. make
+3. ../gcc_64/bin/qmake -o Makefile project.pro
 
-which will generate the executable, then pass right arguments and run it.
+4. make
+
+This will generate the executable.
