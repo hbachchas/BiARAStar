@@ -4553,7 +4553,7 @@ int improvePatho123BiARAstarNEW(qint64 &HcorrectionForward, qint64 &minHerrNodeC
             }
 
             current->vBackward = current->gBackward;      // for second optimization
-            if ( current->gBackward - findHeuristic_F(current, env) == minHerrNodeCountForward )
+            if ( current->gBackward - findHeuristic_F(current, env) == HcorrectionForward )
                 minHerrNodeCountForward--;
 
             QList<PUZZLENODE*> successors;     // vector of children of current
@@ -4593,7 +4593,11 @@ int improvePatho123BiARAstarNEW(qint64 &HcorrectionForward, qint64 &minHerrNodeC
 
                         hashKey = getHashKey(child);
                         if ( !closedlistBackward.value(hashKey, false) )
+                        {
                             minHeapInsertB(openlistBackward, child, env);
+                            if ( child->gBackward - findHeuristic_F(child, env) == HcorrectionForward )
+                                minHerrNodeCountForward++;
+                        }
                         else    // insert into INCONS LIST
                         {
                             // check to avoid multiple insertions

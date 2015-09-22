@@ -20,9 +20,10 @@ QChar *arr;  // for Hash Key
 void callMeFromCMD()    // parameter 1-config 2-epsilon 3-searchType 4-outfile
 {
     //on_btnGenerateConfigFiles_clicked();
-    GConfigFilePath = QCoreApplication::arguments().at(1);
+    //GConfigFilePath = QCoreApplication::arguments().at(1);
     //GConfigFilePath = "/home/peace/Documents/PdD/Planning/MYpaper/1/results/npuzzle/temp/t15puzzle/puz15/env7.cfg";
     //GConfigFilePath = "/home/peace/PDF/puz24/cfgs/env1.cfg";
+    GConfigFilePath = "/home/peace/Documents/PdD/Planning/MYpaper/1/results/npuzzle/15puzzle/puz15/env9.cfg";
     on_btnSearchARAstar_clicked();
     //findWeightWiseIntersection();
     //findMeanStdDevARAstar();
@@ -4348,7 +4349,7 @@ int improvePatho123BiARAstarNEW(qint64 &HcorrectionForward, qint64 &minHerrNodeC
             }
 
             current->vBackward = current->gBackward;      // for second optimization
-            if ( current->gBackward - findHeuristic_F(current, env) == minHerrNodeCountForward )
+            if ( current->gBackward - findHeuristic_F(current, env) == HcorrectionForward )
                 minHerrNodeCountForward--;
 
             QList<PUZZLENODE*> successors;     // vector of children of current
@@ -4388,7 +4389,11 @@ int improvePatho123BiARAstarNEW(qint64 &HcorrectionForward, qint64 &minHerrNodeC
 
                         hashKey = getHashKey(child);
                         if ( !closedlistBackward.value(hashKey, false) )
+                        {
                             minHeapInsertB(openlistBackward, child, env);
+                            if ( child->gBackward - findHeuristic_F(child, env) == HcorrectionForward )
+                                minHerrNodeCountForward++;
+                        }
                         else    // insert into INCONS LIST
                         {
                             // check to avoid multiple insertions

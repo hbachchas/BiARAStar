@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    if (argc<3)     // puzzleDim fileNo
+    if (argc<1)     // puzzleDim fileNo
     {
         QTextStream(stdout) << ">>> Not enough arguments. Please enter config Path followed by image Path" << endl;
         QTextStream(stdout) << ">>> Terminating... from main" << endl;
